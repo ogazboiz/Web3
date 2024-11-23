@@ -1,4 +1,6 @@
-module.exports = {
-    testEnvironment: 'jest-environment-jsdom', // Explicitly set the environment
-  };
-  
+// jest.config.js
+export default {
+  verbose: true,
+  testEnvironment: "node",
+  // other Jest configuration options...
+};
