@@ -70,11 +70,11 @@ To run the **Guess the Number** game on your local machine, follow these steps:
 
 ```bash
 git clone https://github.com/ogazboiz/Web3.git
+```
 
+## folder-structure
 
-### Folder Structure
-
-/guess-the-number
+/Web3
 ├── /public
 │   └── index.html                # Main HTML file for the app
 ├── /src
