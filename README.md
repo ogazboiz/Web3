@@ -74,7 +74,8 @@ git clone https://github.com/ogazboiz/Web3.git
 
 ## folder-structure
 
-/Web3
+```bash
+/guess-the-number
 ├── /public
 │   └── index.html                # Main HTML file for the app
 ├── /src
