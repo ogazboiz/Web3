@@ -80,11 +80,7 @@ const Game = () => {
           <button
             key={level}
             onClick={() => setGameDifficulty(level)}
-            className={`px-4 py-2 mb-2 rounded ${
-              difficulty === level
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
+            className={`px-4 py-2 mb-2 rounded ${difficulty === level ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
           >
             {level}
           </button>
@@ -92,9 +88,7 @@ const Game = () => {
       </div>
       {!gameOver ? (
         <>
-          <p className="text-gray-600 mt-4">
-            You have {attemptsLeft} attempts left.
-          </p>
+          <p className="text-gray-600 mt-4">You have {attemptsLeft} attempts left.</p>
           <input
             type="text"
             value={guess}
@@ -108,15 +102,7 @@ const Game = () => {
           >
             Guess
           </button>
-          <p
-            className={`mt-4 text-center text-lg font-medium transition ${
-              feedback.includes('🎉')
-                ? 'text-green-500 animate-bounceIn'
-                : feedback.includes('Too')
-                ? 'text-red-500 animate-shake'
-                : 'text-gray-800'
-            }`}
-          >
+          <p className={`mt-4 text-center text-lg font-medium transition ${feedback.includes('🎉') ? 'text-green-500 animate-bounceIn' : feedback.includes('Too') ? 'text-red-500 animate-shake' : 'text-gray-800'}`}>
             {feedback}
           </p>
         </>
