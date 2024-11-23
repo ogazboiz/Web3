@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Game = () => {
   const [secretNumber, setSecretNumber] = useState(generateNumber());
   const [guess, setGuess] = useState('');
   const [feedback, setFeedback] = useState('');
-  const [attemptsLeft, setAttemptsLeft] = useState(10); // Default to "Medium"
+  const [attemptsLeft, setAttemptsLeft] = useState(10);
   const [maxAttempts, setMaxAttempts] = useState(10);
   const [gameOver, setGameOver] = useState(false);
   const [difficulty, setDifficulty] = useState('Medium');
@@ -41,6 +41,7 @@ const Game = () => {
   };
 
   const resetGame = () => {
+    // Reset state
     setSecretNumber(generateNumber());
     setGuess('');
     setFeedback('');
@@ -65,19 +66,21 @@ const Game = () => {
     }
     setDifficulty(level);
     setMaxAttempts(attempts);
-    setAttemptsLeft(attempts);
-    resetGame();
   };
 
+  useEffect(() => {
+    resetGame();
+  }, [maxAttempts]);
+
   return (
-    <div className="mt-8 w-80 p-6 bg-white rounded-lg shadow-md">
+    <div className="mt-8 w-full max-w-lg p-6 bg-white rounded-lg shadow-md mx-auto">
       <h2 className="text-xl font-semibold text-center">Guess the Number</h2>
-      <div className="mt-4 flex justify-center space-x-2">
+      <div className="mt-4 flex justify-center space-x-2 flex-wrap">
         {['Easy', 'Medium', 'Hard'].map((level) => (
           <button
             key={level}
             onClick={() => setGameDifficulty(level)}
-            className={`px-3 py-1 rounded ${
+            className={`px-4 py-2 mb-2 rounded ${
               difficulty === level
                 ? 'bg-blue-500 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -89,7 +92,9 @@ const Game = () => {
       </div>
       {!gameOver ? (
         <>
-          <p className="text-gray-600 mt-4">You have {attemptsLeft} attempts left.</p>
+          <p className="text-gray-600 mt-4">
+            You have {attemptsLeft} attempts left.
+          </p>
           <input
             type="text"
             value={guess}
@@ -105,7 +110,11 @@ const Game = () => {
           </button>
           <p
             className={`mt-4 text-center text-lg font-medium transition ${
-              feedback.includes('🎉') ? 'text-green-500' : 'text-gray-800'
+              feedback.includes('🎉')
+                ? 'text-green-500 animate-bounceIn'
+                : feedback.includes('Too')
+                ? 'text-red-500 animate-shake'
+                : 'text-gray-800'
             }`}
           >
             {feedback}
@@ -119,6 +128,12 @@ const Game = () => {
           Play Again
         </button>
       )}
+      <button
+        onClick={resetGame}
+        className="mt-2 w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition"
+      >
+        Restart Game
+      </button>
     </div>
   );
 };
